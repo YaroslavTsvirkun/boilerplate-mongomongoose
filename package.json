@@ -2,9 +2,9 @@
   "name": "fcc-mongo-mongoose-challenges",
   "version": "0.0.1",
   "description": "A boilerplate project",
-  "main": "server.js",
+  "main": "server.ts",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.ts"
   },
   "dependencies": {
     "body-parser": "^1.15.2",

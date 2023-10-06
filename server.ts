@@ -64,7 +64,7 @@ router.get("/is-mongoose-ok", function (req, res) {
   }
 });
 
-const Person = require("./myApp.js").PersonModel;
+const Person = require("./myApp.ts").PersonModel;
 
 router.use(function (req, res, next) {
   if (req.method !== "OPTIONS" && Person.modelName !== "Person") {
@@ -81,7 +81,7 @@ router.post("/mongoose-model", function (req, res, next) {
   res.json(p);
 });
 
-const createPerson = require("./myApp.js").createAndSavePerson;
+const createPerson = require("./myApp.ts").createAndSavePerson;
 router.get("/create-and-save-person", function (req, res, next) {
   // in case of incorrect function use wait timeout then respond
   let t = setTimeout(() => {
@@ -106,7 +106,7 @@ router.get("/create-and-save-person", function (req, res, next) {
   });
 });
 
-const createPeople = require("./myApp.js").createManyPeople;
+const createPeople = require("./myApp.ts").createManyPeople;
 router.post("/create-many-people", function (req, res, next) {
   Person.remove({}, function (err) {
     if (err) {
@@ -136,7 +136,7 @@ router.post("/create-many-people", function (req, res, next) {
   });
 });
 
-const findByName = require("./myApp.js").findPeopleByName;
+const findByName = require("./myApp.ts").findPeopleByName;
 router.post("/find-all-by-name", function (req, res, next) {
   let t = setTimeout(() => {
     next({ message: "timeout" });
@@ -160,7 +160,7 @@ router.post("/find-all-by-name", function (req, res, next) {
   });
 });
 
-const findByFood = require("./myApp.js").findOneByFood;
+const findByFood = require("./myApp.ts").findOneByFood;
 router.post("/find-one-by-food", function (req, res, next) {
   let t = setTimeout(() => {
     next({ message: "timeout" });
@@ -185,7 +185,7 @@ router.post("/find-one-by-food", function (req, res, next) {
   });
 });
 
-const findById = require("./myApp.js").findPersonById;
+const findById = require("./myApp.ts").findPersonById;
 router.get("/find-by-id", function (req, res, next) {
   let t = setTimeout(() => {
     next({ message: "timeout" });
@@ -210,7 +210,7 @@ router.get("/find-by-id", function (req, res, next) {
   });
 });
 
-const findEdit = require("./myApp.js").findEditThenSave;
+const findEdit = require("./myApp.ts").findEditThenSave;
 router.post("/find-edit-save", function (req, res, next) {
   let t = setTimeout(() => {
     next({ message: "timeout" });
@@ -240,7 +240,7 @@ router.post("/find-edit-save", function (req, res, next) {
   });
 });
 
-const update = require("./myApp.js").findAndUpdate;
+const update = require("./myApp.ts").findAndUpdate;
 router.post("/find-one-update", function (req, res, next) {
   let t = setTimeout(() => {
     next({ message: "timeout" });
@@ -270,7 +270,7 @@ router.post("/find-one-update", function (req, res, next) {
   });
 });
 
-const removeOne = require("./myApp.js").removeById;
+const removeOne = require("./myApp.ts").removeById;
 router.post("/remove-one-person", function (req, res, next) {
   Person.remove({}, function (err) {
     if (err) {
@@ -313,7 +313,7 @@ router.post("/remove-one-person", function (req, res, next) {
   });
 });
 
-const removeMany = require("./myApp.js").removeManyPeople;
+const removeMany = require("./myApp.ts").removeManyPeople;
 router.post("/remove-many-people", function (req, res, next) {
   Person.remove({}, function (err) {
     if (err) {
@@ -364,7 +364,7 @@ router.post("/remove-many-people", function (req, res, next) {
   });
 });
 
-const chain = require("./myApp.js").queryChain;
+const chain = require("./myApp.ts").queryChain;
 router.post("/query-tools", function (req, res, next) {
   let t = setTimeout(() => {
     next({ message: "timeout" });
