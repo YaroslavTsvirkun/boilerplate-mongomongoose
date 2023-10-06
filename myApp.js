@@ -1,7 +1,21 @@
 require('dotenv').config();
+const { MongoClient, ServerApiVersion } = require('mongodb');
 
+
+
+const mongo_uri = process.env['MONGO_URI']
+
+const client = new MongoClient(mongo_uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
 
 let Person;
+
+mongoose.connect(mongo_uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const createAndSavePerson = (done) => {
   done(null /*, data*/);
