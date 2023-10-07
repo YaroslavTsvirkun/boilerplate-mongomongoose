@@ -1,6 +1,5 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
-
 mongoose.connect(process.env.MONGO_URI);
 
 const Schema = mongoose.Schema;
@@ -11,10 +10,10 @@ const personSchema = new Schema({
   favoriteFoods: [String]
 });
 
-let Person = mongoose.model("Person", personSchema);
+let PersonModel = mongoose.model("Person", personSchema);
 
 const createAndSavePerson = function(done) {
-  var jonDoe = new Person({ name: "Jon Doe", age: 31, favoriteFoods: ["beer", "fish"] });
+  var jonDoe = new PersonModel({ name: "Jon Doe", age: 31, favoriteFoods: ["beer", "fish"] });
 
   jonDoe.save(function(err, data) {
     if (err) return console.error(err);
@@ -22,8 +21,17 @@ const createAndSavePerson = function(done) {
   });
 };
 
+let arrayOfPeople = [
+  new PersonModel({ name: "Mars", age: 74, favoriteFoods: ["Del Taco"] }),
+  new PersonModel({ name: "Sol", age: 76, favoriteFoods: ["roast chicken"] }),
+  new PersonModel({ name: "Unona", age: 78, favoriteFoods: ["wine"] })
+];
+
 const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
+  PersonModel.create(arrayOfPeople, function(err, people) {
+    if (err) return console.log(err);
+    done(null, people);
+  });
 };
 
 const findPeopleByName = (personName, done) => {
@@ -71,8 +79,7 @@ const queryChain = (done) => {
  */
 
 //----- **DO NOT EDIT BELOW THIS LINE** ----------------------------------
-
-exports.PersonModel = Person;
+exports.PersonModel = PersonModel;
 exports.createAndSavePerson = createAndSavePerson;
 exports.findPeopleByName = findPeopleByName;
 exports.findOneByFood = findOneByFood;
