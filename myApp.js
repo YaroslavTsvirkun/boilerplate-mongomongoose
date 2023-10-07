@@ -4,13 +4,13 @@ mongoose.connect(process.env.MONGO_URI);
 
 const Schema = mongoose.Schema;
 
-const personSchema = new Schema({
+const PersonSchema = new Schema({
   name: { type: String, required: true },
   age: Number,
   favoriteFoods: [String]
 });
 
-let PersonModel = mongoose.model("Person", personSchema);
+let PersonModel = mongoose.model("Person", PersonSchema);
 
 const createAndSavePerson = function(done) {
   var jonDoe = new PersonModel({ name: "Jon Doe", age: 31, favoriteFoods: ["beer", "fish"] });
@@ -53,7 +53,10 @@ const findOneByFood = (food, done) => {
 };
 
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+  PersonModel.findById(personId, function(err, data) {
+    if (err) return console.log(err);
+    done(null, data);
+  });
 };
 
 const findEditThenSave = (personId, done) => {
