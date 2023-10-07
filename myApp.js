@@ -30,16 +30,26 @@ let arrayOfPeople = [
 const createManyPeople = (arrayOfPeople, done) => {
   PersonModel.create(arrayOfPeople, function(err, people) {
     if (err) return console.log(err);
+    people.save(function(err, data) {
+      if (err) return console.error(err);
+      done(null, data)
+    });
     done(null, people);
   });
 };
 
 const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+  PersonModel.find({ name: personName }, function(err, personFound) {
+    if (err) return console.log(err);
+    done(null, personFound);
+  });
 };
 
 const findOneByFood = (food, done) => {
-  done(null /*, data*/);
+  PersonModel.findOne({ favoriteFoods: food }, function(err, data) {
+    if (err) return console.log(err);
+    done(null, data);
+  });
 };
 
 const findPersonById = (personId, done) => {
